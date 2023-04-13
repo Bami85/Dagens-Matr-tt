@@ -14,7 +14,7 @@ export default function Example() {
     const fetchSuggestedFood = async () => {
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/food/products/search?query=${selectedDay}&number=1`,
+          `https://api.spoonacular.com/food/products/search?query=${selectedDay}&number=4`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function Example() {
       .then((response) => response.json())
       .then((data) => setProducts(data.products))
       .catch((error) => console.error('Error fetching product data:', error))
-  }, [query, selectedDay]) // Aggiungi selectedDay come dipendenza dell'effetto
+  }, [query, selectedDay]) 
 
   const handleSearch = (event) => {
     event.preventDefault()
@@ -122,6 +122,7 @@ export default function Example() {
                     Sök
                   </button>
                 </form>
+                
               </div>
             </div>
           </div>
@@ -179,3 +180,6 @@ export default function Example() {
     </div>
   )
 }
+
+
+
