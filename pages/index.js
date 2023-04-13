@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 
@@ -7,15 +6,42 @@ import { Fragment, useState } from 'react'
 export default function Example() {
   const [products, setProducts] = useState([])
   const [query, setQuery] = useState('') // Sökkriteriet
+  const [selectedDay, setSelectedDay] = useState('')
+  const [suggestedFood, setSuggestedFood] = useState('')
 
   useEffect(() => {
-    // Hämta produktdata från Spoonacular API baserat på sökfrågan
+    // Effettua una chiamata API per ottenere un cibo correlato al giorno della settimana selezionato
+    const fetchSuggestedFood = async () => {
+      try {
+        const response = await fetch(
+          `https://api.spoonacular.com/food/products/search?query=${selectedDay}&number=1`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-API-Key': '94503ca481d649bea8a5f8917aeb0c44',
+            },
+          },
+        )
+        const data = await response.json()
+        setSuggestedFood(data.products[0]?.title || '')
+      } catch (error) {
+        console.error('Error fetching suggested food:', error)
+      }
+    }
+
+    // Esegui la chiamata API solo se è stato selezionato un giorno della settimana
+    if (selectedDay) {
+      fetchSuggestedFood()
+    }
+  }, [selectedDay])
+
+  useEffect(() => {
+    // Utilizza il valore di selectedDay nella chiamata API
     fetch(
-      `https://api.spoonacular.com/food/products/search?query=${query}&number=8`,
+      `https://api.spoonacular.com/food/products/search?query=${query}&day=${selectedDay}&number=8`,
       {
         headers: {
           'Content-Type': 'application/json',
-          // Lägg till din API-nyckel här
           'X-API-Key': '94503ca481d649bea8a5f8917aeb0c44',
         },
       },
@@ -23,17 +49,21 @@ export default function Example() {
       .then((response) => response.json())
       .then((data) => setProducts(data.products))
       .catch((error) => console.error('Error fetching product data:', error))
-  }, [query])
+  }, [query, selectedDay]) // Aggiungi selectedDay come dipendenza dell'effetto
 
   const handleSearch = (event) => {
     event.preventDefault()
     // Uppdatera sökfrågan baserat på användarens inmatning
     setQuery(event.target.query.value)
   }
+  const handleDaySelect = (day) => {
+    setSelectedDay(day)
+  }
 
   return (
     <div className="bg-white">
       {/* Mobile menu */}
+
       <main>
         {/* Hero section */}
         <div className="relative">
@@ -103,26 +133,35 @@ export default function Example() {
             <h2 id="collection-heading" className="sr-only">
               Collections
             </h2>
-            <div className="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8">
-            </div>
+            <div className="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8"></div>
           </section>
         </div>
 
         <section aria-labelledby="trending-heading">
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
             <div className="md:flex md:items-center md:justify-between">
-              <h2
-                id="favorites-heading"
-                className="text-2xl font-bold tracking-tight text-gray-900"
+              <h1>Food of the day suggestion</h1>
+              <select
+                value={selectedDay}
+                onChange={(e) => setSelectedDay(e.target.value)}
               >
-                Trending Products
-              </h2>
+                <option value="">Select a day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+              {suggestedFood && <p>Daily food suggestion : {suggestedFood}</p>}
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-            {products && products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
             </div>
 
             <div className="mt-8 text-sm md:hidden">
@@ -136,7 +175,6 @@ export default function Example() {
             </div>
           </div>
         </section>
-
       </main>
     </div>
   )
