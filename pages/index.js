@@ -140,7 +140,7 @@ export default function Example() {
                       Sök
                     </button>
                   </form>
-
+                </div>
                   {/* add food form  */}
                   <div className="mt-4 sm:mt-6">
                     <input
@@ -162,7 +162,6 @@ export default function Example() {
                       Button
                     </button>
                   </div>
-                </div>
               </div>
             </div>
 
