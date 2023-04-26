@@ -1,8 +1,253 @@
+// import React, { useEffect } from 'react'
+// import ProductCard from '../components/ProductCard'
+// import { Fragment, useState } from 'react'
+
+// export default function Example() {
+//   const [products, setProducts] = useState([])
+//   const [query, setQuery] = useState('') // Sökkriteriet
+//   const [selectedDay, setSelectedDay] = useState('')
+//   const [suggestedFood, setSuggestedFood] = useState('')
+
+//   const [addFood, setAddfood] = useState([])
+//   const [temporaryFood, setTemporaryFood] = useState()
+
+//   // Addfood function
+//   const AddNewFood = (text, imageUrl) => {
+//     const newFood = {
+//       text: text,
+//       image: imageUrl,
+//     }
+//     setAddfood([...addFood, newFood])
+//   }
+
+//   // useEffect for att sätta setTemporary food
+//   useEffect(() => {
+//     console.log(addFood)
+//   }, [addFood])
+
+//   useEffect(() => {
+//     // Effettua una chiamata API per ottenere un cibo correlato al giorno della settimana selezionato
+//     const fetchSuggestedFood = async () => {
+//       try {
+//         const response = await fetch(
+//           `https://api.spoonacular.com/food/products/search?query=${selectedDay}&number=4`,
+//           {
+//             headers: {
+//               'Content-Type': 'application/json',
+//               'X-API-Key': '94503ca481d649bea8a5f8917aeb0c44',
+//             },
+//           },
+//         )
+//         const data = await response.json()
+//         setSuggestedFood(data.products[0]?.title || '')
+//       } catch (error) {
+//         console.error('Error fetching suggested food:', error)
+//       }
+//     }
+
+//     // Esegui la chiamata API solo se è stato selezionato un giorno della settimana
+//     if (selectedDay) {
+//       fetchSuggestedFood()
+//     }
+//   }, [selectedDay])
+
+//   useEffect(() => {
+//     // Utilizza il valore di selectedDay nella chiamata API
+//     fetch(
+//       `https://api.spoonacular.com/food/products/search?query=${query}&day=${selectedDay}&number=8`,
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'X-API-Key': '94503ca481d649bea8a5f8917aeb0c44',
+//         },
+//       },
+//     )
+//       .then((response) => response.json())
+//       .then((data) => setProducts(data.products))
+//       .catch((error) => console.error('Error fetching product data:', error))
+//   }, [query, selectedDay])
+
+//   const handleSearch = (event) => {
+//     event.preventDefault()
+//     // Uppdatera sökfrågan baserat på användarens inmatning
+//     setQuery(event.target.query.value)
+//   }
+//   const handleDaySelect = (day) => {
+//     setSelectedDay(day)
+//   }
+
+//   return (
+//     <>
+//       <div className=""></div>
+//       <div className="bg-white">
+//         {/* Mobile menu */}
+
+//         <main>
+//           {/* Hero section */}
+//           <div className="relative">
+//             {/* Background image and overlap */}
+//             <div
+//               aria-hidden="true"
+//               className="absolute inset-0 hidden sm:flex sm:flex-col"
+//             >
+//               <div className="relative w-full flex-1 bg-gray-800">
+//                 <div className="absolute inset-0 overflow-hidden">
+//                   <img
+//                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMG4WHGZGb1RFz8s_Vf4oB5S4jcORwWA0uaw&usqp=CAU"
+//                     alt=""
+//                     className="h-full w-full object-cover object-center"
+//                   />
+//                 </div>
+//                 <div className="absolute inset-0 bg-gray-900 opacity-50" />
+//               </div>
+//               <div className="h-32 w-full bg-white md:h-40 lg:h-48" />
+//             </div>
+
+//             <div className="relative mx-auto max-w-3xl px-4 pb-96 text-center sm:px-6 sm:pb-0 lg:px-8">
+//               {/* Background image and overlap */}
+//               <div
+//                 aria-hidden="true"
+//                 className="absolute inset-0 flex flex-col sm:hidden"
+//               >
+//                 <div className="relative w-full flex-1 bg-gray-800">
+//                   <div className="absolute inset-0 overflow-hidden">
+//                     <img
+//                       src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+//                       alt=""
+//                       className="h-full w-full object-cover object-center"
+//                     />
+//                   </div>
+//                   <div className="absolute inset-0 bg-gray-900 opacity-50" />
+//                 </div>
+//                 <div className="h-48 w-full bg-white" />
+//               </div>
+//               <div className="relative py-32">
+//                 <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+//                   Dagens Maträtt
+//                 </h1>
+//                 <div className="mt-4 sm:mt-6">
+//                   <form onSubmit={handleSearch} className="">
+//                     <input
+//                       type="text"
+//                       name="query"
+//                       placeholder="Sök efter en produkt..."
+//                       className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
+//                     />
+//                     <button
+//                       type="submit"
+//                       className="font-medium text-indigo-600 hover:text-indigo-500"
+//                     >
+//                       Sök
+//                     </button>
+//                   </form>
+//                 </div>
+//                   {/* add food form  */}
+//                   <div className="mt-4 sm:mt-6">
+//                     <input
+//                       type="text"
+//                       value={temporaryFood}
+//                       placeholder="Sätt en ny produkt..."
+//                       onChange={(e) => {
+//                         setTemporaryFood(e.target.value)
+//                       }}
+//                       className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
+//                     />
+//                     <button
+//                       className="font-medium text-indigo-600 hover:text-indigo-500"
+//                       onClick={() => {
+//                         AddNewFood(temporaryFood)
+//                         setTemporaryFood('')
+//                       }}
+//                     >
+//                       Button
+//                     </button>
+//                   </div>
+//               </div>
+//             </div>
+
+//             <section
+//               aria-labelledby="collection-heading"
+//               className="relative -mt-96 sm:mt-0"
+//             >
+//               <h2 id="collection-heading" className="sr-only">
+//                 Collections
+//               </h2>
+//               <div className="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8"></div>
+//             </section>
+//           </div>
+
+//           <section aria-labelledby="trending-heading">
+//             <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+//               <div className="md:flex md:items-center md:justify-between">
+//                 <h1>Food of the day suggestion</h1>
+//                 <select
+//                   value={selectedDay}
+//                   onChange={(e) => setSelectedDay(e.target.value)}
+//                 >
+//                   <option value="">Select a day</option>
+//                   <option value="Monday">Monday</option>
+//                   <option value="Tuesday">Tuesday</option>
+//                   <option value="Wednesday">Wednesday</option>
+//                   <option value="Thursday">Thursday</option>
+//                   <option value="Friday">Friday</option>
+//                   <option value="Saturday">Saturday</option>
+//                   <option value="Sunday">Sunday</option>
+//                 </select>
+//                 {suggestedFood && (
+//                   <p>Daily food suggestion : {suggestedFood}</p>
+//                 )}
+//               </div>
+
+//               <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+//                 {products &&
+//                   products.map((product) => (
+//                     <ProductCard key={product.id} product={product} />
+//                   ))}
+//               </div>
+//               {/* New Maträtt  */}
+//               <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+//                 {/* {addFood && addFood.map((foods,index)=>{
+//                return(
+//                 <div key={index}>
+//                 <h2>{foods.text}</h2>
+//                 <img src={foods.image} alt={foods.text} />
+//               </div>
+//                )
+//              })} */}
+//                 <div>
+//                   {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
+//                   {addFood.map((food, index) => (
+//                     <div key={index}>
+//                       <h2>{food.text}</h2>
+//                       <img src={food.image} alt={food.text} />
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+
+//               <div className="mt-8 text-sm md:hidden">
+//                 <a
+//                   href="#"
+//                   className="font-medium text-indigo-600 hover:text-indigo-500"
+//                 >
+//                   Shop the collection
+//                   <span aria-hidden="true"> &rarr;</span>
+//                 </a>
+//               </div>
+//             </div>
+//           </section>
+//         </main>
+//       </div>
+//     </>
+//   )
+// }
+
+import Image from 'next/image'
 import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 import { Fragment, useState } from 'react'
 
-export default function Example() {
+export default function Home() {
   const [products, setProducts] = useState([])
   const [query, setQuery] = useState('') // Sökkriteriet
   const [selectedDay, setSelectedDay] = useState('')
@@ -75,105 +320,131 @@ export default function Example() {
   const handleDaySelect = (day) => {
     setSelectedDay(day)
   }
-
   return (
-    <>
-      <div className=""></div>
-      <div className="bg-white">
-        {/* Mobile menu */}
-
-        <main>
-          {/* Hero section */}
-          <div className="relative">
-            {/* Background image and overlap */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 hidden sm:flex sm:flex-col"
-            >
-              <div className="relative w-full flex-1 bg-gray-800">
-                <div className="absolute inset-0 overflow-hidden">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMG4WHGZGb1RFz8s_Vf4oB5S4jcORwWA0uaw&usqp=CAU"
-                    alt=""
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gray-900 opacity-50" />
-              </div>
-              <div className="h-32 w-full bg-white md:h-40 lg:h-48" />
-            </div>
-
-            <div className="relative mx-auto max-w-3xl px-4 pb-96 text-center sm:px-6 sm:pb-0 lg:px-8">
-              {/* Background image and overlap */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 flex flex-col sm:hidden"
+    <div class="relative w-full">
+      <nav class="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
+        <div class="container m-auto px-2 md:px-12 lg:px-7">
+          <div class="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
+            <div class="w-full px-6 flex justify-between lg:w-max md:px-0">
+              <button
+                aria-label="humburger"
+                id="hamburger"
+                class="relative w-10 h-10 -mr-2 lg:hidden"
               >
-                <div className="relative w-full flex-1 bg-gray-800">
-                  <div className="absolute inset-0 overflow-hidden">
-                    <img
-                      src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
-                      alt=""
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gray-900 opacity-50" />
-                </div>
-                <div className="h-48 w-full bg-white" />
-              </div>
-              <div className="relative py-32">
-                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-                  Dagens Maträtt
-                </h1>
-                <div className="mt-4 sm:mt-6">
-                  <form onSubmit={handleSearch} className="">
-                    <input
-                      type="text"
-                      name="query"
-                      placeholder="Sök efter en produkt..."
-                      className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
-                    />
-                    <button
-                      type="submit"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Sök
-                    </button>
-                  </form>
-                </div>
-                  {/* add food form  */}
-                  <div className="mt-4 sm:mt-6">
-                    <input
-                      type="text"
-                      value={temporaryFood}
-                      placeholder="Sätt en ny produkt..."
-                      onChange={(e) => {
-                        setTemporaryFood(e.target.value)
-                      }}
-                      className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
-                    />
-                    <button
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                      onClick={() => {
-                        AddNewFood(temporaryFood)
-                        setTemporaryFood('')
-                      }}
-                    >
-                      Button
-                    </button>
-                  </div>
-              </div>
+                <div
+                  aria-hidden="true"
+                  id="line"
+                  class="inset-0 w-6 h-0.5 m-auto rounded bg-yellow-900 transtion duration-300"
+                ></div>
+                <div
+                  aria-hidden="true"
+                  id="line2"
+                  class="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-yellow-900 transtion duration-300"
+                ></div>
+              </button>
             </div>
 
-            <section
-              aria-labelledby="collection-heading"
-              className="relative -mt-96 sm:mt-0"
-            >
-              <h2 id="collection-heading" className="sr-only">
-                Collections
-              </h2>
-              <div className="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8"></div>
-            </section>
+            <div class="hidden w-full lg:flex flex-wrap justify-end items-center space-y-6 p-6 rounded-xl bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent lg:w-7/12">
+              <div class="text-gray-600 lg:pr-4">
+                <ul class="space-y-6 tracking-wide font-medium text-sm md:flex md:space-y-0">
+                  <li>
+                    <a
+                      href="#"
+                      class="block md:px-4 transition hover:text-yellow-700"
+                    >
+                      <span>On|Line|Restaurang</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block md:px-4 transition hover:text-yellow-700"
+                    >
+                      <span>Önskelista</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block md:px-4 transition hover:text-yellow-700"
+                    >
+                      <span>Cart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="w-full space-y-2 border-yellow-200 lg:space-y-0 md:w-max lg:border-l">
+                <button
+                  type="button"
+                  title="Start buying"
+                  class="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 focus:bg-yellow-100 sm:w-max"
+                >
+                  <span class="block text-yellow-800 font-semibold text-sm">
+                    Sign up
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  title="Start buying"
+                  class="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                >
+                  <span class="block text-yellow-900 font-semibold text-sm">
+                    Login
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="relative bg-yellow-50">
+        <div class="container m-auto px-6 pt-32 md:px-12 lg:pt-[4.8rem] lg:px-7">
+          <div class="flex items-center flex-wrap px-2 md:px-0">
+            <div class="relative lg:w-6/12 lg:py-24 xl:py-32">
+              <h1 class="font-bold text-4xl text-yellow-900 md:text-5xl lg:w-10/12">
+                Dina favoriträtter
+              </h1>
+              <form onSubmit={handleSearch} className="">
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Sök efter en produkt..."
+                  className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
+                />
+                <button
+                  type="submit"
+                  className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                >
+                  Sök
+                </button>
+              </form>
+            </div>
+            <div class="ml-auto -mb-24 lg:-mb-56 lg:w-6/12"></div>
+            <p class="font-bold text-4xl text-yellow-900 md:text-5xl lg:w-10/12">
+              Laga din favorit marätt{' '}
+            </p>
+            {/* add food form  */}
+            <div className="mt-4 sm:mt-6">
+              <input
+                type="text"
+                value={temporaryFood}
+                placeholder="Sätt en ny produkt..."
+                onChange={(e) => {
+                  setTemporaryFood(e.target.value)
+                }}
+                className="px-4 py-2 border border-gray-100 m-[-0.5rem]"
+              />
+              <button
+                className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                onClick={() => {
+                  AddNewFood(temporaryFood)
+                  setTemporaryFood('')
+                }}
+              >
+                Button
+              </button>
+            </div>
           </div>
 
           <section aria-labelledby="trending-heading">
@@ -236,8 +507,51 @@ export default function Example() {
               </div>
             </div>
           </section>
-        </main>
+          <section aria-labelledby="trending-heading">
+            <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+                <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+                {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
+                  {addFood.map((food, index) => (
+                    <div key={index}>
+                      <h2>{food.text}</h2>
+                      <img src={food.image} alt={food.text} />
+                    </div>
+                  ))}
+              </div>
+              {/* New Maträtt  */}
+              <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+                {/* {addFood && addFood.map((foods,index)=>{
+               return(
+                <div key={index}>
+                <h2>{foods.text}</h2>
+                <img src={foods.image} alt={foods.text} />
+              </div>
+               )
+             })} */}
+                <div>
+                  {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
+                  {addFood.map((food, index) => (
+                    <div key={index}>
+                      <h2>{food.text}</h2>
+                      <img src={food.image} alt={food.text} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8 text-sm md:hidden">
+                <a
+                  href="#"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Shop the collection
+                  <span aria-hidden="true"> &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
