@@ -176,12 +176,8 @@ export default function Home() {
                 </button>
               </form>
             </div>
-            <div class="ml-auto -mb-24 lg:-mb-56 lg:w-6/12"></div>
-            <p class="font-bold text-4xl text-yellow-900 md:text-5xl lg:w-10/12">
-              Laga din favorit marätt{' '}
-            </p>
-            {/* add food form  */}
-            <div className="mt-4 sm:mt-6">
+             {/* add food form  */}
+             <div className="mt-4 sm:mt-6"> 
               <input
                 type="text"
                 value={temporaryFood}
@@ -198,9 +194,10 @@ export default function Home() {
                   setTemporaryFood('')
                 }}
               >
-                Button
+                Sätt
               </button>
             </div>
+           
           </div>
 
           <section aria-labelledby="trending-heading">
