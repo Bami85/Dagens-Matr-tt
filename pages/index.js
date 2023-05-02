@@ -2,8 +2,13 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 import { Fragment, useState } from 'react'
+import ToDo from "../components/ToDoForm"
+import {v4 as uuidv4 }from "uuid";
+
+uuidv4();
 
 export default function Home() {
+  const [todos, setTodos] = useState([]);
   const [products, setProducts] = useState([])
   const [query, setQuery] = useState('') // Sökkriteriet
   const [selectedDay, setSelectedDay] = useState('')
@@ -11,6 +16,15 @@ export default function Home() {
 
   const [addFood, setAddfood] = useState([])
   const [temporaryFood, setTemporaryFood] = useState()
+
+  // const addTodo = todo => {
+  //   setTodos([...todos,{id:uuidv4(), task:todos,completed:false, isEditing:false}])
+  //   console.log(todos)
+  // }
+
+  const addTodo = todo => {
+    setTodos([...todos, todo]);
+  };
 
   // Addfood function
   const AddNewFood = (text, imageUrl) => {
@@ -198,6 +212,18 @@ export default function Home() {
               </button>
             </div>
            
+          </div>
+        {/* // to do form här */}
+          <div className ="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+            <ToDo addTodo={addTodo}/>
+           {
+             todos.map((todo, index)=>{
+               return(
+                 <h1 task={todo} key={index}></h1>
+               )
+             })
+           }
+          
           </div>
 
           <section aria-labelledby="trending-heading">
