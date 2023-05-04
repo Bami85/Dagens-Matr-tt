@@ -2,13 +2,15 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 import { Fragment, useState } from 'react'
-import ToDo from "../components/ToDoForm"
-import {v4 as uuidv4 }from "uuid";
+import ToDo from '../components/ToDoForm'
+import { v4 as uuidv4 } from 'uuid'
 
-uuidv4();
+uuidv4()
 
-export default function Home() {
-  const [todos, setTodos] = useState([]);
+export default function Home({ product }) {
+  // const [cart, setCart] = useState([])
+
+  const [todos, setTodos] = useState([])
   const [products, setProducts] = useState([])
   const [query, setQuery] = useState('') // Sökkriteriet
   const [selectedDay, setSelectedDay] = useState('')
@@ -22,9 +24,9 @@ export default function Home() {
   //   console.log(todos)
   // }
 
-  const addTodo = todo => {
-    setTodos([...todos, todo]);
-  };
+  const addTodo = (todo) => {
+    setTodos([...todos, todo])
+  }
 
   // Addfood function
   const AddNewFood = (text, imageUrl) => {
@@ -90,6 +92,35 @@ export default function Home() {
   const handleDaySelect = (day) => {
     setSelectedDay(day)
   }
+
+  // const addToCart = (product)=>{
+  //   const cartCopy= [...cart]
+  //   const itemIncart= cartCopy.find(i=>i.name===product.name)
+  //   if(itemIncart){
+  //     itemIncart.quantity +=1
+  //     setCart(cartCopy)
+  //   }else {
+  //     setCart(prevCart=>[...prevCart, {...product, quantity:1}])
+  //   }
+  // }
+
+  // const increase = name=>{
+  //   const cartCopy= [...cart]
+  //   const product= cartCopy.find(i =>i.name === name)
+  // }
+
+  // const decrease = name=>{
+  //   let cartCopy= [...cart]
+  //   const product= cartCopy.find(i =>i.name === name)
+  //   if(product.quantity >1){
+  //     product.quantity -=1
+  //   } else {
+  //     cartCopy = cartCopy.filter(i =>i.name !==name)
+  //   }
+  //   setCart(cartCopy)
+
+  // }
+
   return (
     <div class="relative w-full">
       <nav class="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
@@ -190,8 +221,8 @@ export default function Home() {
                 </button>
               </form>
             </div>
-             {/* add food form  */}
-             <div className="mt-4 sm:mt-6"> 
+            {/* add food form  */}
+            <div className="mt-4 sm:mt-6">
               <input
                 type="text"
                 value={temporaryFood}
@@ -211,20 +242,41 @@ export default function Home() {
                 Sätt
               </button>
             </div>
-           
           </div>
-        {/* // to do form här */}
-          <div className ="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
-            <ToDo addTodo={addTodo}/>
-           {
-             todos.map((todo, index)=>{
-               return(
-                 <h1 task={todo} key={index}></h1>
-               )
-             })
-           }
-          
-          </div>
+          {/* // to do form här */}
+          {/* <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+            <h2>Products</h2>
+
+            {products &&
+              products.map((product) => (
+                <div key={product.name}>
+                  <h1>{product.description}</h1>
+                  <p1>{product.price}</p1>
+                  <button onClick={() => addToCart(product)}>
+                    Add products
+                  </button>
+                </div>
+              ))}
+          </div> */}
+
+          {/* // Increase button  */}
+          {/* <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+            <h2>Cart</h2>
+
+            {products &&
+              products.map((product) => (
+                <div key={product.name}>
+                  <button onClick={() => increase(product.name)}>
+                    Increase
+                  </button>
+                  <button onClick={() => decrease(product.name)}>
+                    Decrease
+                  </button>
+
+                  <p1>Subtotal:{product.quantity * product.price}</p1>
+                </div>
+              ))}
+          </div> */}
 
           <section aria-labelledby="trending-heading">
             <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
@@ -265,7 +317,7 @@ export default function Home() {
                )
              })} */}
                 <div>
-                  {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
+                  {temporaryFood && <p>Your recept for today <br/> {temporaryFood}</p>}
                   {addFood.map((food, index) => (
                     <div key={index}>
                       <h2>{food.text}</h2>
@@ -286,49 +338,7 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <section aria-labelledby="trending-heading">
-            <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
-              <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-                {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
-                {addFood.map((food, index) => (
-                  <div key={index}>
-                    <h2>{food.text}</h2>
-                    <img src={food.image} alt={food.text} />
-                  </div>
-                ))}
-              </div>
-              {/* New Maträtt  */}
-              <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-                {/* {addFood && addFood.map((foods,index)=>{
-               return(
-                <div key={index}>
-                <h2>{foods.text}</h2>
-                <img src={foods.image} alt={foods.text} />
-              </div>
-               )
-             })} */}
-                <div>
-                  {temporaryFood && <p>Your recept for today{temporaryFood}</p>}
-                  {addFood.map((food, index) => (
-                    <div key={index}>
-                      <h2>{food.text}</h2>
-                      <img src={food.image} alt={food.text} />
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="mt-8 text-sm md:hidden">
-                <a
-                  href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Shop the collection
-                  <span aria-hidden="true"> &rarr;</span>
-                </a>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>
