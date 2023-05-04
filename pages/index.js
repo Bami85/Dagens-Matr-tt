@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
-import ProductCard from '../components/ProductCard'
 import { Fragment, useState } from 'react'
-import ToDo from '../components/ToDoForm'
 import { v4 as uuidv4 } from 'uuid'
+import ProductCard from "../components/ProductCard"
+
 
 uuidv4()
 
@@ -48,6 +48,7 @@ export default function Home({ product }) {
       try {
         const response = await fetch(
           `https://api.spoonacular.com/food/products/search?query=${selectedDay}&number=4`,
+       
           {
             headers: {
               'Content-Type': 'application/json',
@@ -93,33 +94,6 @@ export default function Home({ product }) {
     setSelectedDay(day)
   }
 
-  // const addToCart = (product)=>{
-  //   const cartCopy= [...cart]
-  //   const itemIncart= cartCopy.find(i=>i.name===product.name)
-  //   if(itemIncart){
-  //     itemIncart.quantity +=1
-  //     setCart(cartCopy)
-  //   }else {
-  //     setCart(prevCart=>[...prevCart, {...product, quantity:1}])
-  //   }
-  // }
-
-  // const increase = name=>{
-  //   const cartCopy= [...cart]
-  //   const product= cartCopy.find(i =>i.name === name)
-  // }
-
-  // const decrease = name=>{
-  //   let cartCopy= [...cart]
-  //   const product= cartCopy.find(i =>i.name === name)
-  //   if(product.quantity >1){
-  //     product.quantity -=1
-  //   } else {
-  //     cartCopy = cartCopy.filter(i =>i.name !==name)
-  //   }
-  //   setCart(cartCopy)
-
-  // }
 
   return (
     <div class="relative w-full">
@@ -169,7 +143,7 @@ export default function Home({ product }) {
                       href="#"
                       class="block md:px-4 transition hover:text-yellow-700"
                     >
-                      <span>Cart</span>
+                      <span>{product}</span>
                     </a>
                   </li>
                 </ul>
