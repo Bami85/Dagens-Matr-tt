@@ -4,9 +4,7 @@ import React from 'react'
 
 export default function Dishes() {
   return (
-    <Layout>
-      <h1>Top Dishes</h1>
-    </Layout>
+    <h1>Dishes</h1>
   )
 }
 
