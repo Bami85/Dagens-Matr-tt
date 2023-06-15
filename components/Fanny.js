@@ -10,7 +10,7 @@ export default function Fanny() {
 
     if (randomNumber >= 0 && randomNumber < 1 / 3) {
       setPressRandom('pizza');
-      setResult('You win, today is your pizza day!');
+      setResult('You won, today is your pizza day!');
     } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
       setPressRandom('See food');
       setResult('You lose');
