@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function ToDo(addTodo) {
-  const [value, setValue]= useState("")
+  const [value, setValue]= useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export default function ToDo(addTodo) {
         <input
           type="text"
           className="todo-input"
-          placeholder="what is your favorit dish?"
+          placeholder="what is your favorit dish"
           onChange={(e)=>setValue(e.target.value)}
         />
           <button type="submit" className="todo-btn">

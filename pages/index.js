@@ -97,36 +97,36 @@ export default function Home({ product }) {
 
 
   return (
-    <div class="relative w-full">
-      <nav class="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
-        <div class="container m-auto px-2 md:px-12 lg:px-7">
-          <div class="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
-            <div class="w-full px-6 flex justify-between lg:w-max md:px-0">
+    <div className="relative w-full">
+      <nav className="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
+        <div className="container m-auto px-2 md:px-12 lg:px-7">
+          <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
+            <div className="w-full px-6 flex justify-between lg:w-max md:px-0">
               <button
                 aria-label="humburger"
                 id="hamburger"
-                class="relative w-10 h-10 -mr-2 lg:hidden"
+                className="relative w-10 h-10 -mr-2 lg:hidden"
               >
                 <div
                   aria-hidden="true"
                   id="line"
-                  class="inset-0 w-6 h-0.5 m-auto rounded bg-yellow-900 transtion duration-300"
+                  className="inset-0 w-6 h-0.5 m-auto rounded bg-yellow-900 transtion duration-300"
                 ></div>
                 <div
                   aria-hidden="true"
                   id="line2"
-                  class="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-yellow-900 transtion duration-300"
+                  className="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-yellow-900 transtion duration-300"
                 ></div>
               </button>
             </div>
 
-            <div class="hidden w-full lg:flex flex-wrap justify-end items-center space-y-6 p-6 rounded-xl bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent lg:w-7/12">
-              <div class="text-gray-600 lg:pr-4">
-                <ul class="space-y-6 tracking-wide font-medium text-sm md:flex md:space-y-0">
+            <div className="hidden w-full lg:flex flex-wrap justify-end items-center space-y-6 p-6 rounded-xl bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent lg:w-7/12">
+              <div className="text-gray-600 lg:pr-4">
+                <ul className="space-y-6 tracking-wide font-medium text-sm md:flex md:space-y-0">
                   <li>
                     <a
                       href="#"
-                      class="block md:px-4 transition hover:text-yellow-700"
+                      className="block md:px-4 transition hover:text-yellow-700"
                     >
                       <span>On|Line|Restaurang</span>
                     </a>
@@ -134,7 +134,7 @@ export default function Home({ product }) {
                   <li>
                     <a
                       href="#"
-                      class="block md:px-4 transition hover:text-yellow-700"
+                      className="block md:px-4 transition hover:text-yellow-700"
                     >
                       <span>Önskelista</span>
                     </a>
@@ -142,7 +142,7 @@ export default function Home({ product }) {
                   <li>
                     <a
                       href="#"
-                      class="block md:px-4 transition hover:text-yellow-700"
+                      className="block md:px-4 transition hover:text-yellow-700"
                     >
                       <span>{product}</span>
                     </a>
@@ -150,22 +150,22 @@ export default function Home({ product }) {
                 </ul>
               </div>
 
-              <div class="w-full space-y-2 border-yellow-200 lg:space-y-0 md:w-max lg:border-l">
+              <div className="w-full space-y-2 border-yellow-200 lg:space-y-0 md:w-max lg:border-l">
                 <button
                   type="button"
                   title="Start buying"
-                  class="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 focus:bg-yellow-100 sm:w-max"
+                  className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 focus:bg-yellow-100 sm:w-max"
                 >
-                  <span class="block text-yellow-800 font-semibold text-sm">
+                  <span className="block text-yellow-800 font-semibold text-sm">
                     Sign up
                   </span>
                 </button>
                 <button
                   type="button"
                   title="Start buying"
-                  class="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                  className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
                 >
-                  <span class="block text-yellow-900 font-semibold text-sm">
+                  <span className="block text-yellow-900 font-semibold text-sm">
                     Login
                   </span>
                 </button>
@@ -174,11 +174,11 @@ export default function Home({ product }) {
           </div>
         </div>
       </nav>
-      <div class="relative bg-yellow-50">
-        <div class="container m-auto px-6 pt-32 md:px-12 lg:pt-[4.8rem] lg:px-7">
-          <div class="flex items-center flex-wrap px-2 md:px-0">
-            <div class="relative lg:w-6/12 lg:py-24 xl:py-32">
-              <h1 class="font-bold text-4xl text-yellow-900 md:text-5xl lg:w-10/12">
+      <div className="relative bg-yellow-50">
+        <div className="container m-auto px-6 pt-32 md:px-12 lg:pt-[4.8rem] lg:px-7">
+          <div className="flex items-center flex-wrap px-2 md:px-0">
+            <div className="relative lg:w-6/12 lg:py-24 xl:py-32">
+              <h1 className="font-bold text-4xl text-yellow-900 md:text-5xl lg:w-10/12">
                 Dina favoriträtter
               </h1>
               <form onSubmit={handleSearch} className="">
