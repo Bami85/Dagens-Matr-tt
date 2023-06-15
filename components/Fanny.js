@@ -22,7 +22,7 @@ export default function Fanny() {
     // alert(`You choose : ${randomNumber} . But the computer choose ${result} `);
     alert(`You picked pizza. Computer picked . ${pressRandom}`);
     // console.log(`You picked ${result}.But computer ${randomNumber}picked . `);
-    console.log(`Yor picked pizza. But computer ${result}`);
+    console.log(`Yor picked pizza. But computer ${pressRandom}`);
   };
 
   return (
