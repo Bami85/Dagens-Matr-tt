@@ -18,11 +18,11 @@ export default function Fanny() {
       setPressRandom('Thai Food');
       setResult('You made a wrong choice');
     }
-    console.log(randomNumber)
+    // console.log(randomNumber)
     // alert(`You choose : ${randomNumber} . But the computer choose ${result} `);
-    alert(`You picked pizza. Computer picked . ${pressRandom}`);
-    // console.log(`You picked ${result}.But computer ${randomNumber}picked . `);
-    console.log(`Yor picked pizza. But computer ${result}`);
+    alert(`You picked Pizza. Computer picked ${pressRandom}. ${result}`);
+
+    console.log(`Yor picked Pizza. Computer picked. ${pressRandom}. ${result} `);
   };
 
   return (
