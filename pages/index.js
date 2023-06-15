@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Fragment, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import ProductCard from "../components/ProductCard";
-import Fanny from "../components/Fanny";
+import FunnyGame from "../components/FunnyGame";
 
 
 uuidv4()
@@ -219,7 +219,7 @@ export default function Home({ product }) {
             </div>
             <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
                 <h1 className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white" >Funny game</h1>
-                <Fanny/>
+                <FunnyGame/>
             </div>
             
           </div>

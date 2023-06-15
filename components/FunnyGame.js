@@ -22,14 +22,14 @@ export default function Fanny() {
     // alert(`You choose : ${randomNumber} . But the computer choose ${result} `);
     alert(`You picked pizza. Computer picked . ${pressRandom}`);
     // console.log(`You picked ${result}.But computer ${randomNumber}picked . `);
-    console.log(`Yor picked pizza. But computer ${pressRandom}`);
+    console.log(`Yor picked pizza. But computer ${result}`);
   };
 
   return (
     <div>
       <button type="button"
         className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleClick}>Pizza </button>
-      <p>{result}</p>
+       <h1>{result}</h1>
     </div>
   );
 }
