@@ -1,38 +1,3 @@
-// import React from 'react';
-
-// const handleClick = () => {
-//   const randomNumber = Math.random();
-//   let pressRandom = '';
-
-//   if (randomNumber >= 0 && randomNumber < 1 / 3) {
-//     pressRandom = 'Pasta';
-//   } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-//     pressRandom = 'See food';
-//   } else if (randomNumber > 2 / 3 && randomNumber < 1) {
-//     pressRandom = 'Thai food';
-//   }
-
-//   console.log(pressRandom);
-
-//   let result = '';
-
-//   if (pressRandom === 'Pasta') {
-//     result = 'You loose the game';
-//   } else if (pressRandom === 'See food') {
-//     result = 'Loose';
-//   } else if (pressRandom === 'Thai fodod') {
-//     result = 'you won the game';
-//   }
-
-//   alert(`You picked Thai Food. Computer picked ${pressRandom}. ${result}`);
-// };
-
-// const Fanny = () => {
-//   return <button onClick={handleClick}>Thai food</button>;
-// };
-
-// export default Fanny;
-
 
 import React, { useState } from 'react';
 
@@ -48,21 +13,22 @@ export default function Fanny() {
       setResult('You win, today is your pizza day!');
     } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
       setPressRandom('See food');
-      setResult('You lose, today is your pizza day!');
+      setResult('You lose');
     } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
       setPressRandom('Thai Food');
       setResult('You made a wrong choice');
     }
-
+    console.log(randomNumber)
     // alert(`You choose : ${randomNumber} . But the computer choose ${result} `);
-    alert(`You picked ${pressRandom}. Computer picked ${pressRandom}. ${result}`);
+    alert(`You picked pizza. Computer picked . ${pressRandom}`);
+    // console.log(`You picked ${result}.But computer ${randomNumber}picked . `);
+    console.log(`Yor picked pizza. But computer ${result}`);
   };
 
   return (
     <div>
-      <button onClick={handleClick}>Pizza </button>
-      <p>{result}</p>
-      <button onClick={handleClick}  >See Food </button>
+      <button type="button"
+        className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleClick}>Pizza </button>
       <p>{result}</p>
     </div>
   );
