@@ -1,8 +1,8 @@
 import React from 'react'
  import Layout from '../../components/Layout'
-import Layout from '../../components/Layout'
 
-export default function Dishes({results}) {
+
+export default function Dishes() {
   return (
     <Layout>
       <h1>Top Dishes</h1>
