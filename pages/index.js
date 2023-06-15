@@ -2,7 +2,8 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { Fragment, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import ProductCard from "../components/ProductCard"
+import ProductCard from "../components/ProductCard";
+import Fanny from "../components/Fanny";
 
 
 uuidv4()
@@ -216,7 +217,14 @@ export default function Home({ product }) {
                 Sätt
               </button>
             </div>
+            <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+                <h1>Fanny game</h1>
+                <Fanny/>
+            </div>
+            
           </div>
+
+          
           {/* // to do form här */}
           {/* <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
             <h2>Products</h2>
@@ -255,7 +263,7 @@ export default function Home({ product }) {
           <section aria-labelledby="trending-heading">
             <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
               <div className="md:flex md:items-center md:justify-between">
-                <h1>Food of the day suggestion</h1>
+                <h1>Day suggestion</h1>
                 <select
                   value={selectedDay}
                   onChange={(e) => setSelectedDay(e.target.value)}
@@ -273,6 +281,8 @@ export default function Home({ product }) {
                   <p>Daily food suggestion : {suggestedFood}</p>
                 )}
               </div>
+
+              
 
               <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
                 {products &&
@@ -310,7 +320,9 @@ export default function Home({ product }) {
                   <span aria-hidden="true"> &rarr;</span>
                 </a>
               </div>
+              
             </div>
+            
           </section>
 
         </div>
